@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="window_bg">#FFFEF7FF</color>
+    <color name="ic_launcher_background">#FF6750A4</color>
+
+    <style name="Theme.SwipeClean" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/window_bg</item>
+    </style>
+</resources>
