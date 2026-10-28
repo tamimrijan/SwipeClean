@@ -5,6 +5,11 @@ A native Android app (Kotlin + Jetpack Compose) that turns photo cleanup into a 
 
 **[⬇ Download the APK](release/SwipeClean-1.0.0.apk)** (Android 8.0+, ≈1.8 MB)
 
+<img width="1080" height="2340" alt="Screenshot_20261029_002336_SwipeClean" src="https://github.com/user-attachments/assets/d078a233-64f9-4c0a-b7fa-adfb5bef3d7a" />
+<img width="1080" height="2340" alt="Screenshot_20261029_002333_SwipeClean" src="https://github.com/user-attachments/assets/1ad92c4f-25d3-4710-868c-e12e5e2c48e9" />
+<img width="1080" height="2340" alt="Screenshot_20261029_002331_SwipeClean" src="https://github.com/user-attachments/assets/ec16ddd9-3558-480f-91a3-97a9c31b794d" />
+
+
 ## Ready-made APKs (`release/` folder)
 
 The `release/` folder updates itself: every `assembleRelease` or `assembleDebug` build copies fresh APKs into it.
