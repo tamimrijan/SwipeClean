@@ -1,6 +1,17 @@
 package com.swipeclean.app.ui.components
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialShapes
+import androidx.compose.material3.toShape
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.unit.Dp
+import androidx.graphics.shapes.RoundedPolygon
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -127,17 +138,33 @@ fun StatCard(
     }
 }
 
-/** Large icon in a tonal circle, used as the headline visual on result and empty screens. */
+/**
+ * Large icon on a slowly turning M3 Expressive shape (a scalloped "cookie" by default),
+ * used as the headline visual on result, empty and permission screens.
+ */
 @Composable
 fun HeroIcon(
     icon: ImageVector,
     container: Color = MaterialTheme.colorScheme.primaryContainer,
     content: Color = MaterialTheme.colorScheme.onPrimaryContainer,
+    polygon: RoundedPolygon = MaterialShapes.Cookie9Sided,
+    size: Dp = 120.dp,
 ) {
-    Surface(shape = CircleShape, color = container, contentColor = content, modifier = Modifier.size(96.dp)) {
-        Box(contentAlignment = Alignment.Center) {
-            Icon(icon, contentDescription = null, modifier = Modifier.size(48.dp))
-        }
+    val spin by rememberInfiniteTransition(label = "heroSpin").animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(tween(18_000, easing = LinearEasing)),
+        label = "heroAngle",
+    )
+    val shape = polygon.toShape()
+    Box(Modifier.size(size), contentAlignment = Alignment.Center) {
+        Box(
+            Modifier
+                .matchParentSize()
+                .graphicsLayer { rotationZ = spin }
+                .background(container, shape)
+        )
+        Icon(icon, contentDescription = null, tint = content, modifier = Modifier.size(size * 0.42f))
     }
 }
 

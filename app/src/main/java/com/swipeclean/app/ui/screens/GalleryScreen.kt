@@ -36,7 +36,7 @@ import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.FilterChip
@@ -132,7 +132,7 @@ fun GalleryScreen(vm: AppViewModel) {
     ) { padding ->
         when {
             vm.loading && vm.photos.isEmpty() -> Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
+                LoadingIndicator(Modifier.size(72.dp))
             }
             filtered.isEmpty() -> Box(Modifier.padding(padding)) {
                 EmptyState("No photos here", vm.loadError ?: "Photos you take will show up here.", vm::goHome)
@@ -229,6 +229,7 @@ private fun Viewer(vm: AppViewModel, photos: List<Photo>, start: Int, onClose: (
         if (queued) {
             FilledTonalButton(
                 onClick = { vm.toggleQueued(photo) },
+                shapes = ButtonDefaults.shapes(),
                 modifier = buttonModifier,
                 contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
             ) {
@@ -239,6 +240,7 @@ private fun Viewer(vm: AppViewModel, photos: List<Photo>, start: Int, onClose: (
         } else {
             Button(
                 onClick = { vm.toggleQueued(photo) },
+                shapes = ButtonDefaults.shapes(),
                 modifier = buttonModifier,
                 colors = ButtonDefaults.buttonColors(containerColor = scheme.error, contentColor = scheme.onError),
                 contentPadding = ButtonDefaults.ButtonWithIconContentPadding,

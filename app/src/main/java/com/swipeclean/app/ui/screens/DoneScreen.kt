@@ -17,6 +17,7 @@ import androidx.compose.material.icons.rounded.PlayArrow
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -48,7 +49,12 @@ fun DoneScreen(vm: AppViewModel) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
-                HeroIcon(Icons.Rounded.CheckCircle, AppTheme.extended.keepContainer, AppTheme.extended.onKeepContainer)
+                HeroIcon(
+                    Icons.Rounded.CheckCircle,
+                    AppTheme.extended.keepContainer,
+                    AppTheme.extended.onKeepContainer,
+                    polygon = MaterialShapes.Sunny,
+                )
                 Spacer(Modifier.height(16.dp))
                 Text("Freed", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Text(formatBytes(outcome.bytes), style = MaterialTheme.typography.displayLarge, color = AppTheme.extended.keep)
@@ -62,6 +68,7 @@ fun DoneScreen(vm: AppViewModel) {
                 Spacer(Modifier.height(32.dp))
                 Button(
                     onClick = vm::startSession,
+                    shapes = ButtonDefaults.shapes(),
                     modifier = Modifier.fillMaxWidth().height(56.dp),
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                 ) {
@@ -70,7 +77,7 @@ fun DoneScreen(vm: AppViewModel) {
                     Text("Another round")
                 }
                 Spacer(Modifier.height(8.dp))
-                OutlinedButton(onClick = vm::goHome, modifier = Modifier.fillMaxWidth().height(56.dp)) {
+                OutlinedButton(onClick = vm::goHome, shapes = ButtonDefaults.shapes(), modifier = Modifier.fillMaxWidth().height(56.dp)) {
                     Text("Back home")
                 }
             }

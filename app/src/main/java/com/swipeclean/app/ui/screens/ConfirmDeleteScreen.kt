@@ -36,7 +36,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -98,13 +98,14 @@ fun ConfirmDeleteScreen(vm: AppViewModel) {
                     ) {
                         Button(
                             onClick = vm::confirmDeletion,
+                            shapes = ButtonDefaults.shapes(),
                             enabled = !vm.deleting,
                             modifier = Modifier.fillMaxWidth().height(56.dp),
                             colors = ButtonDefaults.buttonColors(containerColor = scheme.error, contentColor = scheme.onError),
                             contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                         ) {
                             if (vm.deleting) {
-                                CircularProgressIndicator(Modifier.size(20.dp), color = scheme.onError, strokeWidth = 2.dp)
+                                LoadingIndicator(Modifier.size(32.dp), color = scheme.onError)
                             } else {
                                 Icon(Icons.Rounded.DeleteForever, null, Modifier.size(ButtonDefaults.IconSize))
                                 Spacer(Modifier.width(ButtonDefaults.IconSpacing))
@@ -114,6 +115,7 @@ fun ConfirmDeleteScreen(vm: AppViewModel) {
                         Spacer(Modifier.height(8.dp))
                         OutlinedButton(
                             onClick = { vm.navigate(Screen.Review) },
+                            shapes = ButtonDefaults.shapes(),
                             enabled = !vm.deleting,
                             modifier = Modifier.fillMaxWidth().height(48.dp),
                         ) { Text("Review selection") }
@@ -228,6 +230,7 @@ fun ReviewScreen(vm: AppViewModel) {
             Surface(color = scheme.surfaceContainer) {
                 Button(
                     onClick = { if (selected == 0) vm.goHome() else vm.back() },
+                    shapes = ButtonDefaults.shapes(),
                     modifier = Modifier
                         .navigationBarsPadding()
                         .padding(16.dp)

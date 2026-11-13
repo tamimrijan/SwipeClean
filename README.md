@@ -1,140 +1,87 @@
 <div align="center">
 
+<img src="docs/logo.svg" width="120" alt="SwipeClean logo" />
+
 # SwipeClean
 
 ### Swipe your gallery clean.
 
-A Tinder-style photo cleaner for Android that turns a boring chore into a quick, satisfying game.
-**Swipe left to delete, swipe right to keep.** Nothing is deleted until you say so, twice.
+**SwipeClean** is a Tinder-style photo cleaner for Android.<br/>
+It shows you a few random photos at a time, lets you swipe left to delete or right to keep, and never deletes anything until you *confirm it twice*.
 
-<br>
+<br/>
 
-[![Download APK](https://img.shields.io/badge/Download-APK%20v1.0.0-6750A4?style=for-the-badge&logo=android&logoColor=white)](https://github.com/tamimrijan/SwipeClean/raw/main/release/SwipeClean-1.0.0.apk)
+![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.2-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-M3%20Expressive-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)
+![Offline](https://img.shields.io/badge/Works-100%25%20Offline-6A35D4?style=for-the-badge)
 
-![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?style=flat-square&logo=android&logoColor=white)
-![Kotlin](https://img.shields.io/badge/Kotlin-2.0-7F52FF?style=flat-square&logo=kotlin&logoColor=white)
-![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?style=flat-square&logo=jetpackcompose&logoColor=white)
-![Offline](https://img.shields.io/badge/Internet-not%20required-success?style=flat-square)
-![APK size](https://img.shields.io/badge/APK-1.8%20MB-informational?style=flat-square)
-![License](https://img.shields.io/github/license/tamimrijan/SwipeClean?style=flat-square)
+<br/>
 
-<br>
-
-<img src="https://github.com/user-attachments/assets/ec16ddd9-3558-480f-91a3-97a9c31b794d" width="250" alt="SwipeClean screenshot 1" />
-&nbsp;&nbsp;
-<img src="https://github.com/user-attachments/assets/1ad92c4f-25d3-4710-868c-e12e5e2c48e9" width="250" alt="SwipeClean screenshot 2" />
-&nbsp;&nbsp;
-<img src="https://github.com/user-attachments/assets/d078a233-64f9-4c0a-b7fa-adfb5bef3d7a" width="250" alt="SwipeClean screenshot 3" />
+[**⬇️ Download the latest APK**](https://github.com/tamimrijan/SwipeClean/raw/main/release/SwipeClean-1.0.0.apk) &nbsp;·&nbsp; [Features](#-features) &nbsp;·&nbsp; [Screenshots](#-screenshots) &nbsp;·&nbsp; [Build](#-build-it-yourself)
 
 </div>
 
 ---
 
-## Why SwipeClean?
+## ✨ Features
 
-Your gallery has thousands of photos: blurry shots, duplicates, old screenshots and memes.
-Scrolling through all of them is exhausting, so nobody does it.
+### 👆 Swipe to clean
+- **Quick sessions**: 10 to 15 random photos per round on big full-screen cards (you can change the range).
+- **Feels great**: rotation, KEEP and DELETE stamps, spring physics, haptics and velocity flings.
+- **Fast controls**: swipe, or use the delete, undo and keep buttons. Double-tap a photo to keep it.
+- **No repeats**: photos you have never seen come first, then the ones shown longest ago.
 
-SwipeClean hands you **10–15 random photos at a time** on big full-screen cards. Swipe through them
-in under a minute, while you're bored, in bed at night, or riding as a passenger, and watch your storage free up.
+### 🛡️ Safe deletion
+> Swipe left → photo goes to a *deletion queue* → session summary → **Review & confirm** → Android's own delete dialog
 
-## How it works
+Nothing is deleted on a swipe. You can undo, review the selection, keep everything, or come back to the queue later.
 
-```mermaid
-flowchart LR
-    A([Start cleaning]) --> B[Swipe 10-15 photos]
-    B -->|Swipe right| K[Kept]
-    B -->|Swipe left| Q[Deletion queue]
-    Q --> S[Session summary]
-    S --> R{Review & confirm}
-    R -->|Cancel| K
-    R -->|Delete| D[Android system dialog]
-    D --> F([Space freed])
-```
+- **Session summary** shows how many photos you kept, how many you marked and how much space you could free.
+- **Confirmation screen** with previews and three choices: *Delete*, *Review selection* or *Cancel deletion*.
+- **System approved**: uses `MediaStore.createDeleteRequest` on Android 11+, so Android asks one more time. No root needed.
 
-> **You stay in control.** A left swipe only *queues* a photo. You can undo, review the selection,
-> or cancel. Photos are deleted only after you confirm in the app **and** in Android's own dialog.
+### 🎯 Smart filters
+- **Skip what you want**: screenshots, downloaded images or favorites (favorites are protected by default).
+- **Albums**: choose which albums can appear in sessions.
+- **Full gallery browser** with album chips and a swipeable full-screen viewer.
 
-## Features
+### 🎮 Fun, not pushy
+- Optional **daily goal** with a wavy progress ring, **day streaks** and lifetime stats.
+- Confetti and friendly messages. Keeping photos is celebrated too.
 
-<table>
-<tr>
-<td width="50%" valign="top">
+### 🎨 Design
+- **Material 3 Expressive** design: bold Inter type, playful shapes (cookies, clovers, sunny bursts), shape morphing buttons, wavy progress and springy motion.
+- Light and dark themes, plus optional Material You dynamic color.
+- A one-screen home page, tabbed settings and an edge-to-edge layout.
 
-### Swipe to clean
-- Large full-screen photo cards
-- Rotation, KEEP / DELETE stamps and spring physics
-- Haptic feedback and velocity flings
-- Double-tap to keep, plus **Undo**
-- Session counter and progress bar
+---
 
-</td>
-<td width="50%" valign="top">
+## 📱 Screenshots
 
-### Safe by design
-- Temporary deletion queue that persists
-- Summary showing kept, deleted and space to free
-- Confirmation screen with previews
-- **Delete / Review / Cancel** options
-- Uses Android's official delete confirmation
+<div align="center">
 
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
+| Home | Swipe | Summary |
+|:---:|:---:|:---:|
+| <img src="https://github.com/user-attachments/assets/ec16ddd9-3558-480f-91a3-97a9c31b794d" width="220"/> | <img src="https://github.com/user-attachments/assets/1ad92c4f-25d3-4710-868c-e12e5e2c48e9" width="220"/> | <img src="https://github.com/user-attachments/assets/d078a233-64f9-4c0a-b7fa-adfb5bef3d7a" width="220"/> |
 
-### Smart sessions
-- Random picks that avoid recently shown photos
-- Skip screenshots, downloads or favorites
-- Exclude whole albums
-- Adjustable session size (5–30)
+</div>
 
-</td>
-<td width="50%" valign="top">
+---
 
-### Fun, not pushy
-- Optional daily goal with a progress ring
-- Day streaks and lifetime stats
-- Confetti and friendly messages
-- Keeping photos is celebrated too
+## 🚀 Install
 
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-
-### Beautiful UI
-- Material 3 design-kit styling
-- Light, dark or system theme
-- Optional Material You dynamic color
-- Inter typeface, edge-to-edge layout
-
-</td>
-<td width="50%" valign="top">
-
-### Private & light
-- **No internet permission** at all
-- Everything runs locally on your device
-- No background services or tracking
-- Full gallery browser with album filters
-
-</td>
-</tr>
-</table>
-
-## Download & install
-
-1. Download **[SwipeClean-1.0.0.apk](https://github.com/tamimrijan/SwipeClean/raw/main/release/SwipeClean-1.0.0.apk)** on your phone.
-2. Open it and allow **Install unknown apps** when Android asks.
-3. Tap **Install**. If Play Protect warns about an unknown developer, choose **Install anyway**.
+1. Download **`SwipeClean-1.0.0.apk`** from the [`release`](release) folder.
+2. Open it on your phone and allow *Install unknown apps* when asked.
+3. Open SwipeClean and allow photo access.
+4. Tap **Start cleaning** and swipe away.
 
 <details>
 <summary><b>Install with USB (adb)</b></summary>
 
-<br>
+<br/>
 
-1. Enable **Developer options** (tap *Build number* 7 times in *About phone*), then turn on **USB debugging**.
-2. Connect your phone and run:
+Turn on **USB debugging** in Developer options, connect your phone and run:
 
 ```bash
 adb install -r release/SwipeClean-1.0.0.apk
@@ -142,103 +89,72 @@ adb install -r release/SwipeClean-1.0.0.apk
 
 </details>
 
-## Privacy
+---
 
-| | |
+## 🛠 Tech stack
+
+| Area | Built with |
 |---|---|
-| Internet access | **None.** The app has no `INTERNET` permission. |
-| Where data lives | Only on your device: settings, stats and history are stored locally. |
-| Deletion | Only through Android's system-approved APIs. No root needed. |
-| Background work | None. Photos are scanned only when you open the app. |
+| Language and UI | Kotlin 2.2, Jetpack Compose 1.11, Material 3 Expressive (material3 1.5) |
+| Photos | MediaStore API, Coil image loading |
+| Deletion | `MediaStore.createDeleteRequest` (Android 11+), `RecoverableSecurityException` (Android 10) |
+| Permissions | `READ_MEDIA_IMAGES`, partial "Select photos" access on Android 14+ |
+| Storage | SharedPreferences (all on the device) |
+| Typography | Inter variable font (SIL Open Font License) |
+| Build | Gradle 8.11, AGP 8.7, R8 minified release (~2 MB) |
 
-## Compatibility
+---
 
-| Android version | Photo access | How deletion is approved |
-|---|---|---|
-| 14+ | All photos, or **Select photos** (partial access) | System confirmation dialog |
-| 13 | `READ_MEDIA_IMAGES` | System confirmation dialog |
-| 11–12 | `READ_EXTERNAL_STORAGE` | System confirmation dialog |
-| 10 | `READ_EXTERNAL_STORAGE` | System consent prompt |
-| 8–9 | Storage permission | In-app confirmation |
+## 🧑‍💻 Build it yourself
 
-Minimum **Android 8.0** (API 26) · Target **API 35**
-
-## Build from source
-
-<details>
-<summary><b>Android Studio (easiest)</b></summary>
-
-<br>
-
-1. Install **Android Studio** (Ladybug 2024.2 or newer).
-2. **File → Open** and select the project folder.
-3. Wait for Gradle sync, then press **Run ▶**.
-
-</details>
-
-<details>
-<summary><b>Command line</b></summary>
-
-<br>
-
-You'll need **JDK 17** and the **Android SDK** (platform 35).
+**You need:** Android Studio (Ladybug or newer) or JDK 17 plus Android SDK 35.
 
 ```bash
 git clone https://github.com/tamimrijan/SwipeClean.git
 cd SwipeClean
-./gradlew assembleRelease      # Windows: .\gradlew.bat assembleRelease
+./gradlew assembleDebug        # debug APK
+./gradlew assembleRelease      # optimised release APK
 ```
 
-The APK is copied to `release/SwipeClean-<version>.apk` automatically.
+Every build copies the APKs into `release/` as `SwipeClean-<version>.apk`.
 
-> The release build is signed with the debug key so it installs for testing.
-> Use your own keystore before publishing to Google Play.
-
-</details>
-
-<details>
-<summary><b>Project structure</b></summary>
-
-<br>
-
-```
-app/src/main/java/com/swipeclean/app/
-├── MainActivity.kt              Edge-to-edge entry point
-├── data/
-│   ├── Photo.kt                 Photo & Album models
-│   ├── PhotoRepository.kt       MediaStore queries + version-specific deletion
-│   ├── Permissions.kt           Per-version permission logic
-│   ├── Prefs.kt                 Settings, stats, streaks, queue, history
-│   └── SessionPicker.kt         Random, filtered, no-repeat selection
-└── ui/
-    ├── App.kt                   Permission gate, navigation, system dialogs
-    ├── AppViewModel.kt          Session, queue, deletion flow and stats
-    ├── theme/Theme.kt           Material 3 colors + Inter typography
-    ├── components/Common.kt     Shared UI pieces and confetti
-    └── screens/                 Home, Swipe, Summary, Confirm, Gallery, Settings...
-```
-
-</details>
-
-## Built with
-
-![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)
-![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)
-![Material Design](https://img.shields.io/badge/Material%203-757575?style=for-the-badge&logo=materialdesign&logoColor=white)
-![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white)
-
-Kotlin 2.0 · Jetpack Compose (Material 3) · MediaStore API · Coil · Gradle 8.11 ·
-[Inter](https://rsms.me/inter/) typeface (SIL Open Font License)
+**Release signing:** the release APK is signed with the debug key so it installs for testing.
+Use your own keystore before publishing to Google Play.
 
 ---
 
+## 📂 Project structure
+
+```
+app/src/main/java/com/swipeclean/app/
+├── data/        MediaStore queries, deletion, permissions, settings, session picker
+└── ui/          Compose screens, components, theme, view model
+docs/            logo
+release/         ready-to-install APK
+```
+
+---
+
+## 🔒 Privacy
+
+- No account, no ads, no analytics.
+- **No internet permission at all.** Your photos never leave your phone.
+- Settings, stats and history are stored only on the device.
+- Photos are deleted only through Android's system-approved APIs, after you confirm.
+
+---
+
+## 👤 Author
+
 <div align="center">
 
-### Made by Tamim Ahmed Rijan
+**Tamim Ahmed Rijan**
 
-[![GitHub](https://img.shields.io/badge/GitHub-tamimrijan-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/tamimrijan)
 [![Instagram](https://img.shields.io/badge/Instagram-tamim__ahmed__rijan-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/tamim_ahmed_rijan/)
+[![GitHub](https://img.shields.io/badge/GitHub-tamimrijan-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/tamimrijan)
 
-If SwipeClean helped you free up some space, consider giving it a ⭐
+<br/>
+
+If SwipeClean helped you free up space, give it a ⭐
 
 </div>

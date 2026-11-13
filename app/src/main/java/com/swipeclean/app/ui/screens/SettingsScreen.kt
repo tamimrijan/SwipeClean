@@ -58,9 +58,16 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.RangeSlider
-import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material3.ButtonGroupDefaults
+import androidx.compose.material3.MaterialShapes
+import androidx.compose.material3.SwitchDefaults
+import androidx.compose.material3.ToggleButton
+import androidx.compose.material3.toShape
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
@@ -247,17 +254,24 @@ private fun LazyListScope.lookAndFeelTab(vm: AppViewModel) {
             leadingContent = { Icon(Icons.Rounded.Brightness6, null) },
             headlineContent = { Text("Theme") },
             supportingContent = {
+                // M3 Expressive connected button group.
                 val modes = listOf(ThemeMode.SYSTEM to "System", ThemeMode.LIGHT to "Light", ThemeMode.DARK to "Dark")
-                SingleChoiceSegmentedButtonRow(
+                Row(
                     Modifier
                         .fillMaxWidth()
-                        .padding(top = 8.dp)
+                        .padding(top = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween),
                 ) {
                     modes.forEachIndexed { i, (mode, label) ->
-                        SegmentedButton(
-                            selected = s.themeMode == mode,
-                            onClick = { vm.updateSettings { it.copy(themeMode = mode) } },
-                            shape = SegmentedButtonDefaults.itemShape(i, modes.size),
+                        ToggleButton(
+                            checked = s.themeMode == mode,
+                            onCheckedChange = { vm.updateSettings { it.copy(themeMode = mode) } },
+                            shapes = when (i) {
+                                0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
+                                modes.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
+                                else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
+                            },
+                            modifier = Modifier.weight(1f),
                         ) { Text(label) }
                     }
                 }
@@ -307,10 +321,13 @@ private fun LazyListScope.aboutTab(vm: AppViewModel, onManageAccess: () -> Unit)
         ) {
             ListItem(
                 leadingContent = {
-                    Surface(shape = CircleShape, color = scheme.primaryContainer, modifier = Modifier.size(56.dp)) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Text("TR", style = MaterialTheme.typography.titleLarge, color = scheme.onPrimaryContainer)
-                        }
+                    Box(
+                        Modifier
+                            .size(60.dp)
+                            .background(scheme.primary, MaterialShapes.Cookie9Sided.toShape()),
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text("TR", style = MaterialTheme.typography.titleLarge, color = scheme.onPrimary)
                     }
                 },
                 overlineContent = { Text("Designed & developed by") },
@@ -416,6 +433,19 @@ private fun SwitchItem(
         leadingContent = { Icon(icon, null) },
         headlineContent = { Text(title) },
         supportingContent = { Text(subtitle) },
-        trailingContent = { Switch(checked = checked, onCheckedChange = onChange, enabled = enabled) },
+        trailingContent = {
+            Switch(
+                checked = checked,
+                onCheckedChange = onChange,
+                enabled = enabled,
+                thumbContent = {
+                    Icon(
+                        if (checked) Icons.Rounded.Check else Icons.Rounded.Close,
+                        contentDescription = null,
+                        modifier = Modifier.size(SwitchDefaults.IconSize),
+                    )
+                },
+            )
+        },
     )
 }

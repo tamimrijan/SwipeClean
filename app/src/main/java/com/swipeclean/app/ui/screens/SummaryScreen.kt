@@ -21,7 +21,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.LinearWavyProgressIndicator
+import androidx.compose.material3.MaterialShapes
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
@@ -62,7 +63,10 @@ fun SummaryScreen(vm: AppViewModel) {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Spacer(Modifier.height(16.dp))
-                HeroIcon(if (summary.goalJustReached) Icons.Rounded.EmojiEvents else Icons.Rounded.TaskAlt)
+                HeroIcon(
+                    if (summary.goalJustReached) Icons.Rounded.EmojiEvents else Icons.Rounded.TaskAlt,
+                    polygon = if (summary.goalJustReached) MaterialShapes.Sunny else MaterialShapes.Cookie9Sided,
+                )
                 Spacer(Modifier.height(16.dp))
                 Text(summary.message, style = MaterialTheme.typography.headlineMedium, textAlign = TextAlign.Center)
                 Spacer(Modifier.height(8.dp))
@@ -100,7 +104,7 @@ fun SummaryScreen(vm: AppViewModel) {
                                 style = MaterialTheme.typography.titleMedium,
                             )
                             Spacer(Modifier.height(12.dp))
-                            LinearProgressIndicator(
+                            LinearWavyProgressIndicator(
                                 progress = { (today.toFloat() / goal).coerceIn(0f, 1f) },
                                 modifier = Modifier.fillMaxWidth(),
                                 color = extended.keep,
@@ -114,6 +118,7 @@ fun SummaryScreen(vm: AppViewModel) {
                 if (queued > 0) {
                     Button(
                         onClick = { vm.navigate(Screen.Confirm) },
+                        shapes = ButtonDefaults.shapes(),
                         modifier = Modifier.fillMaxWidth().height(56.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = scheme.error, contentColor = scheme.onError),
                         contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
@@ -126,6 +131,7 @@ fun SummaryScreen(vm: AppViewModel) {
                 }
                 FilledTonalButton(
                     onClick = vm::startSession,
+                    shapes = ButtonDefaults.shapes(),
                     modifier = Modifier.fillMaxWidth().height(56.dp),
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding,
                 ) {

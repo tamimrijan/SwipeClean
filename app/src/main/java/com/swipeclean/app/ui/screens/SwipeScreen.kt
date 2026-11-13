@@ -35,13 +35,15 @@ import androidx.compose.material3.Badge
 import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.FilledTonalIconButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.LargeFloatingActionButton
-import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.LinearWavyProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -163,24 +165,37 @@ fun SwipeScreen(vm: AppViewModel) {
             )
         },
         bottomBar = {
-            Row(
+            // Floating pill toolbar with shape-morphing expressive buttons.
+            Box(
                 Modifier
                     .fillMaxWidth()
                     .navigationBarsPadding()
-                    .padding(top = 4.dp, bottom = 20.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.CenterVertically,
+                    .padding(top = 4.dp, bottom = 16.dp),
+                contentAlignment = Alignment.Center,
             ) {
-                SwipeFab(Icons.Rounded.Close, "Delete", scheme.errorContainer, scheme.onErrorContainer) { fling(false) }
-                FilledTonalIconButton(
-                    onClick = {
-                        if (vm.settings.haptics) haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        vm.undo()
-                    },
-                    enabled = index > 0,
-                    modifier = Modifier.size(56.dp),
-                ) { Icon(Icons.AutoMirrored.Rounded.Undo, "Undo") }
-                SwipeFab(Icons.Rounded.Favorite, "Keep", extended.keepContainer, extended.onKeepContainer) { fling(true) }
+                Surface(
+                    shape = CircleShape,
+                    color = scheme.surfaceContainerHigh,
+                    shadowElevation = 3.dp,
+                ) {
+                    Row(
+                        Modifier.padding(10.dp),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        SwipeAction(Icons.Rounded.Close, "Delete", scheme.error, scheme.onError) { fling(false) }
+                        FilledTonalIconButton(
+                            onClick = {
+                                if (vm.settings.haptics) haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                vm.undo()
+                            },
+                            shapes = IconButtonDefaults.shapes(),
+                            enabled = index > 0,
+                            modifier = Modifier.size(IconButtonDefaults.mediumContainerSize()),
+                        ) { Icon(Icons.AutoMirrored.Rounded.Undo, "Undo", Modifier.size(IconButtonDefaults.mediumIconSize)) }
+                        SwipeAction(Icons.Rounded.Favorite, "Keep", extended.keep, extended.onKeep) { fling(true) }
+                    }
+                }
             }
         },
     ) { padding ->
@@ -194,7 +209,7 @@ fun SwipeScreen(vm: AppViewModel) {
                 animationSpec = spring(stiffness = Spring.StiffnessLow),
                 label = "progress",
             )
-            LinearProgressIndicator(
+            LinearWavyProgressIndicator(
                 progress = { progress },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -295,15 +310,16 @@ fun SwipeScreen(vm: AppViewModel) {
     }
 }
 
+/** Large icon button that morphs from round to squircle while pressed (M3 Expressive). */
 @Composable
-private fun SwipeFab(icon: ImageVector, label: String, container: Color, content: Color, onClick: () -> Unit) {
-    LargeFloatingActionButton(
+private fun SwipeAction(icon: ImageVector, label: String, container: Color, content: Color, onClick: () -> Unit) {
+    FilledIconButton(
         onClick = onClick,
-        containerColor = container,
-        contentColor = content,
-        elevation = FloatingActionButtonDefaults.elevation(defaultElevation = 2.dp),
+        shapes = IconButtonDefaults.shapes(),
+        colors = IconButtonDefaults.filledIconButtonColors(containerColor = container, contentColor = content),
+        modifier = Modifier.size(IconButtonDefaults.largeContainerSize()),
     ) {
-        Icon(icon, contentDescription = label, modifier = Modifier.size(FloatingActionButtonDefaults.LargeIconSize))
+        Icon(icon, contentDescription = label, modifier = Modifier.size(IconButtonDefaults.largeIconSize))
     }
 }
 

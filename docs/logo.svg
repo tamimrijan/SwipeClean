@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <!-- SwipeClean logo: same artwork as the adaptive launcher icon -->
+  <rect width="108" height="108" rx="30" fill="#6A35D4"/>
+  <g transform="rotate(-14 54 54)">
+    <rect x="36" y="33" width="36" height="42" rx="6" fill="#FFFFFF" fill-opacity="0.35"/>
+  </g>
+  <g transform="rotate(8 54 54)">
+    <rect x="36" y="33" width="36" height="42" rx="6" fill="#FFFFFF"/>
+    <g transform="translate(44.4 44.4) scale(0.8)">
+      <path fill="#FF5A8A" d="M12,21.35l-1.45,-1.32C5.4,15.36 2,12.28 2,8.5 2,5.42 4.42,3 7.5,3c1.74,0 3.41,0.81 4.5,2.09C13.09,3.81 14.76,3 16.5,3 19.58,3 22,5.42 22,8.5c0,3.78 -3.4,6.86 -8.55,11.54L12,21.35z"/>
+    </g>
+  </g>
+</svg>
